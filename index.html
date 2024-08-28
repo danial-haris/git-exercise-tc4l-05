@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMU CLUB MANAGEMENT</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Times New Roman', Times, serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background-color: #f5f5f5;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            width: 100%;
+            height: calc(100vh - 60px); /* Adjusted for header height */
+            position: relative;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 60px;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            border-right: 1px solid #ccc;
+            height: 100%;
+            z-index: 1000; /* Ensure visibility */
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: #fff;
+            position: relative;
+            margin-left: 60px; /* Make space for the sidebar */
+        }
+
+        img {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 20px;
+        }
+
+        .chat-icon {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        MMU CLUB MANAGEMENT
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <img src="{{ url_for('static', filename='home_icon.png') }}" alt="Home">
+            <img src="{{ url_for('static', filename='menu_icon.png') }}" alt="Menu">
+        </div>
+        <div class="content">
+            <img src="{{ url_for('static', filename='chat_icon.png') }}" alt="Chat" class="chat-icon">
+        </div>
+    </div>
+</body>
+</html>
