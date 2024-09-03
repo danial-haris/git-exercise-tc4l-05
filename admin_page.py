@@ -1,15 +1,24 @@
-from flask import Flask
-from  flask_sqlalchemy import SQLAlchemy
-from flask_admin import Admin
+from flask import Flask, render_template
 
-db = SQLAlchemy()
-Admin = Admin()
+App = Flask(__name__)
 
-def admin_page():
-    app = Flask(__name__)
-    app.config("SQLALCHEMY_DATABASE_URL") == "sqlite:///db.sqlite3"
+@App.route('/')
+@App.route('/home')
+def home():
+    return render_template('home.html')
 
-    db.init_app(app)
-    Admin.init_app(app)
+@App.route('/admin')
+def admin():
+    return render_template('admin.html')
 
-    return app
+@App.route('/user')
+def user():
+    return render_template('user.html')
+
+@App.route('/clubs')
+def clubs():
+    return render_template('clubs.html')
+
+if __name__ == '__main__' :
+    App.run(debug=True)
+    

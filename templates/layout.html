@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+content="width=device-width, initial scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .navbar {
+            display: flex;
+            background-color: #d3d3d3;
+            padding: 10px;
+            justify-content: flex-start;
+        }
+        .navbar a {
+            margin-right: 10px;
+            padding: 10px;
+            background-color: #696969;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .navbar a.active {
+            background-color: white;
+            color: black;
+        }
+        .content {
+            padding: 20px;
+        }
+    </style>
+</head> 
+<body>
+    <div class="navbar">
+        <a href="/admin" class="{{'active' if request.path == '/admin_page' else}}">admin</a>
+        <a href="/home" class="{{'active' if request.path == '/home' else}}">home</a>
+        <a href="/user" class="{{'active' if request.path == '/user' else}}">user</a>
+        <a href="/clubs" class="{{'active' if request.path == '/clubs' else}}">clubs</a>
+    </div>
+    <div class="content">
+        {% block content %} {% endblock %}
+    </div>
+</body>
+</html>
