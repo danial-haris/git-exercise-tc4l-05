@@ -39,8 +39,11 @@ content="width=device-width, initial scale=1.0">
         <a href="/user" class="{{'active' if request.path == '/user' else}}">user</a>
         <a href="/clubs" class="{{'active' if request.path == '/clubs' else}}">clubs</a>
     </div>
+
     <div class="content">
-        {% block content %} {% endblock %}
+        {% block content %}
+        {% endblock %}
     </div>
+
 </body>
 </html>
