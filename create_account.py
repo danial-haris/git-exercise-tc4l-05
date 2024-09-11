@@ -1,15 +1,19 @@
-from flask import Flask, send_from_directory
-import os
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+clubs = []  # You can replace this with file/database storage
 
 @app.route('/')
 def home():
+    return render_template('index.html', clubs=clubs)
 
-    return send_from_directory(BASE_DIR, 'index.html')
+@app.route('/create_club', methods=['POST'])
+def create_club():
+    club_name = request.form.get('club_name')
+    if club_name:
+        clubs.append(club_name)
+    return redirect(url_for('home'))
 
 if __name__ == '__main__':
     app.run(debug=True)
- 
