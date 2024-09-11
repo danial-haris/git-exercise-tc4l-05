@@ -14,10 +14,10 @@ def login():
 
         user = User.query.filter_by(email=email).first()
         if user:
-            if check_password_hash(user.password, password):
+            if check_password_hash (user.password, password):
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
-                return redirect(url_for('views.home'))
+                return redirect(url_for('views.home'))#homepage
             else:
                 flash('Incorrect password, try again.', category='error')
         else:
@@ -35,28 +35,34 @@ def logout():
 def signup():
     if request.method == 'POST':
         email = request.form.get('email')
-        username = request.form.get('username')
+        first_name = request.form.get('first_name')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
-        if len(email) < 10:
+        user = User.query.filter_by(email=email).first()
+        if user:
+            flash('Email already exists!',category='error')
+        elif len(email) < 10:
             flash('Please use your MMU account.', category='error')
         elif password1 != password2:
             flash('Passwords don\'t match.', category='error')
         elif len(password1) < 7:
             flash('Password must be at least 7 characters.', category='error')
-            if len(username) < 5:
+        elif len(first_name) < 5:
                 flash('Please use your full name.', category='error')
                 
         else:
-            # hashed_password = generate_password_hash(password1, method='bcrypt')
-            # print (f'Hashed password: { hashed_password }')
-            new_user = User(email=email, username=username, password=password1)
+            new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1,method='pbkdf2:sha256'))
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user,remember=True)
             flash('Account created!',category='success')
-            return redirect(url_for('views.home'))
+            return redirect(url_for('views.home'))#homepage
 
 
     return render_template("sign_up.html",user=current_user)
+
+@auth.route('/')
+def mainpage():
+    return render_template("mainpage.html")
+
