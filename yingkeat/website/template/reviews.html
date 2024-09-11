@@ -1,0 +1,142 @@
+{% extends "base2.html" %}
+{% block title %}Member{% endblock %}
+
+{% block content %}
+<title>Club Review</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .club-container {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .club-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .review-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .review-form textarea {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: vertical;
+            font-family: inherit;
+            font-size: 1em;
+        }
+
+        .review-form input[type="number"] {
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 80px;
+            font-size: 1em;
+        }
+
+        .submit-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        .reviews-container {
+            margin-top: 20px;
+        }
+
+        .review {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .review-header {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .review-rating {
+            color: #ff9800;
+        }
+
+        .review-comment {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="club-container">
+        <div class="club-header">
+            <h2>Review Club</h2>
+        </div>
+
+        <form id="reviewForm" class="review-form">
+            <label for="rating">Rating (1-5):</label>
+            <input type="number" id="rating" name="rating" min="1" max="5" required>
+            
+            <label for="comment">Comment:</label>
+            <textarea id="comment" name="comment" rows="4" placeholder="Write your review here..." required></textarea>
+            
+            <button type="submit" class="submit-btn">Submit Review</button>
+        </form>
+
+
+        <div class="reviews-container" id="reviewsContainer">
+            <h3>Reviews:</h3>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('reviewForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+
+            const rating = document.getElementById('rating').value;
+            const comment = document.getElementById('comment').value;
+
+            const reviewContainer = document.createElement('div');
+            reviewContainer.classList.add('review');
+
+            const reviewHeader = document.createElement('div');
+            reviewHeader.classList.add('review-header');
+            reviewHeader.textContent = `Rating: ${rating} / 5`;
+
+            const reviewComment = document.createElement('div');
+            reviewComment.classList.add('review-comment');
+            reviewComment.textContent = comment;
+
+            reviewContainer.appendChild(reviewHeader);
+            reviewContainer.appendChild(reviewComment);
+
+            document.getElementById('reviewsContainer').appendChild(reviewContainer);
+
+            document.getElementById('rating').value = '';
+            document.getElementById('comment').value = '';
+        });
+    </script>
+{% endblock %}
