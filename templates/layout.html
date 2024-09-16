@@ -2,47 +2,138 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-content="width=device-width, initial scale=1.0">
-    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
         }
+
         .navbar {
             display: flex;
-            background-color: #5b7deb;
+            background-color: #4c6ef5;
             padding: 10px;
             justify-content: flex-start;
         }
+
         .navbar a {
             margin-right: 10px;
-            padding: 10px;
-            background-color: #696969;
+            padding: 10px 15px;
+            background-color: #636e72;
             color: white;
             text-decoration: none;
             border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
+
         .navbar a.active {
-            background-color: white;
+            background-color: #dfe6e9;
             color: black;
         }
-        .content {
+
+        .navbar a:hover {
+            background-color: #74b9ff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
             padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2d3436;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #dcdde1;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4c6ef5;
+            color: white;
+        }
+
+        td {
+            background-color: #f4f4f9;
+        }
+
+        .form-container {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container input[type="text"], 
+        .form-container input[type="email"] {
+            padding: 10px;
+            width: 100%;
+            margin: 10px 0;
+            border: 1px solid #dcdde1;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            background-color: #4c6ef5;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #74b9ff;
+        }
+
+        .delete-btn {
+            background-color: #d63031;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background-color: #e17055;
         }
     </style>
-</head> 
+</head>
 <body>
     <div class="navbar">
-        <a href="/admin" class="{{'active' if request.path == '/admin_page' else}}">admin</a>
-        <a href="/home" class="{{'active' if request.path == '/home' else}}">home</a>
-        <a href="/user" class="{{'active' if request.path == '/user' else}}">user</a>
-        <a href="/clubs" class="{{'active' if request.path == '/clubs' else}}">clubs</a>
+        <a href="/admin" class="{% if request.path == '/admin' %}active{% endif %}">Admin</a>
+        <a href="/home" class="{% if request.path == '/home' %}active{% endif %}">Home</a>
+        <a href="/user" class="{% if request.path == '/user' %}active{% endif %}">User</a>
+        <a href="/clubs" class="{% if request.path == '/clubs' %}active{% endif %}">Clubs</a>
     </div>
 
-    <div class="content">
-       Admin Homepage
+    <div class="container">
+        {% block content %}
+        {% endblock %}
     </div>
-
 </body>
 </html>

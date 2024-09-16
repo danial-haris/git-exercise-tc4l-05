@@ -1,5 +1,41 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<h1>User Page</h1>
+<h1>User Management</h1>
+
+<!--Form to add a new user-->
+<form method="post" action="/user">
+    <label for="Name">Name:</label>
+    <input type="text" id="username" name="username" required>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <button type="submit">Add User</button>
+</form>
+
+<!-- Table to Display Users -->
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                <!--delete button-->
+                <form method="post" action="/user/delete/{{user.id}}">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
