@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template,request,flash,redirect,url_for
+from flask import Blueprint,render_template,request,flash,redirect,url_for,Flask
 from .models import User
 from werkzeug.security import generate_password_hash,check_password_hash
 from . import db
@@ -62,7 +62,42 @@ def signup():
 
     return render_template("sign_up.html",user=current_user)
 
-@auth.route('/')
+@auth.route('/main')
 def mainpage():
     return render_template("mainpage.html")
+
+reviews = []
+
+@auth.route('/', methods=['GET', 'POST'])
+def review():
+    if request.method == 'POST':
+        rating = request.form['rating']
+        comment = request.form['comment']
+        
+        review = {
+            'rating': rating,
+            'comment': comment
+        }
+        reviews.append(review)
+
+        return redirect(url_for('auth.review'))
+
+    return render_template('review_club.html', reviews=reviews)
+
+# clubs = [
+#     {'name': 'Photography Club', 'role': 'Member', 'join_date': '9 September 2024'},
+#     {'name': 'Book Lovers Club', 'role': 'Admin', 'join_date': '9 September 2024'}
+# ]
+
+# @auth.route('/member')
+# def member():
+#     return render_template('member.html', clubs=clubs)
+
+
+
+
+
+
+
+
 
