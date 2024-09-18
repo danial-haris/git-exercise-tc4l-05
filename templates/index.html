@@ -4,46 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MMU CLUB MANAGEMENT</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <div class="header">MMU CLUB MANAGEMENT</div>
-    <div class="container">
-        <div class="sidebar">
-            <button class="icon-button"><i class="fas fa-home"></i></button>
-            <button class="icon-button"><i class="fas fa-comments"></i></button>
-            <label for="dropdownToggle" class="ellipsis-button">&#8230;</label>
-            <input type="checkbox" id="dropdownToggle" class="dropdown-toggle">
-            <div class="dropdown">
-                <label for="dropdownToggle" class="close-dropdown">&#10005;</label>
-                <a href="#createClubPopup">Create a Club</a>
-                <a href="#joinClubPopup">Join a Club</a>
-            </div>
-        </div>
-        <div class="content"></div>
-    </div>
 
-    <div id="createClubPopup" class="popup">
-        <div class="popup-content">
-            <a href="#" class="close-btn">&times;</a>
-            <h2>CREATE YOUR CLUB</h2>
-            <input type="text" id="clubNameInput" placeholder="Enter club name...">
-            <div>
-                <a href="#" class="btn">CREATE</a>
-                <a href="#" class="btn cancel">CANCEL</a>
+    <div class="sidebar">
+        <a href="#"><i class="fas fa-home"></i></a>
+        <a href="#"><i class="fas fa-comments"></i></a>
+        <div class="dropdown">
+            <button class="ellipsis-btn"><i class="fas fa-ellipsis-h"></i></button>
+            <div class="dropdown-content">
+                <a href="#createClubModal" class="open-create-modal">Create a Club</a>
+                <a href="#joinClubModal" class="open-join-modal">Join a Club</a>
             </div>
         </div>
     </div>
 
-    <div id="joinClubPopup" class="popup">
-        <div class="popup-content">
-            <a href="#" class="close-btn">&times;</a>
-            <h2>JOIN A CLUB</h2>
-            <ul id="clubList">
-                <!-- Club items will be added here -->
-            </ul>
+    <div class="main-content">
+        <h1 class="center">Welcome to MMU Club Management</h1>
+    </div>
+
+    <!-- Modal for creating a club -->
+    <div class="modal" id="createClubModal">
+        <div class="modal-content">
+            <a href="#" class="close">&times;</a>
+            <form action="/create_club" method="POST">
+                <label for="club-name">Create a Club</label>
+                <input type="text" id="club-name" name="club-name" placeholder="Enter club name">
+                <div class="modal-buttons">
+                    <a href="#" class="modal-button cancel">Cancel</a>
+                    <input type="submit" class="modal-button create" value="Create">
+                </div>
+            </form>
         </div>
     </div>
+
+    <!-- Modal for joining a club (with club list) -->
+    <div class="modal" id="joinClubModal">
+        <div class="modal-content">
+            <a href="#" class="close">&times;</a>
+            <form action="/join_club" method="POST">
+                <label for="join-club">Join a Club</label>
+                <select id="join-club" name="join-club">
+                    {% for club in clubs %}
+                        <option value="{{ club['name'] }}">{{ club['name'] }}</option>
+                    {% else %}
+                        <option disabled>No clubs available</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Join">
+            </form>
+        </div>
+    </div>
+
 </body>
 </html>
