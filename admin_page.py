@@ -1,14 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+import sqlite3
 
 App = Flask(__name__)
 
-# configure sqlite database
+# sqlite database
 App.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///management.db'
 App.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(App)
 
-# Define User model
+# User model
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), nullable=False)
