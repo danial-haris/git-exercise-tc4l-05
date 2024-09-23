@@ -5,10 +5,15 @@ from flask import jsonify
 
 App = Flask(__name__)
 
-# sqlite database
-App.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///management.db'
-App.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(App)
+db = SQLAlchemy
+DB_NAME = "database.db"
+
+def create_app():
+    app = Flask(__name__)
+    App.config
+    App.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+    App.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.init_app(App)
 
 # Message model for chat
 class Message(db.Model):
