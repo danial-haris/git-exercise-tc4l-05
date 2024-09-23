@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1>User Management</h1>
+
+<!--Form to add a new user-->
+<form method="post" action="/user">
+    <label for="Name">Name:</label>
+    <input type="text" id="username" name="username" required>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <button type="submit">Add User</button>
+</form>
+
+<style>
+    body {
+      background-image: url('https://www.gdparchitects.com/wp-content/uploads/2022/11/education_mmucyberjaya_006_new.jpg');
+      background-size: cover;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid black; /* Add borders */
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #4c6ef5;
+        color: white;
+    }
+
+    td {
+        background-color: #f4f4f9;
+    }
+  </style>
+
+<!-- Table to Display Users -->
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                <!--delete button-->
+                <form method="post" action="/user/delete/{{user.id}}">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
