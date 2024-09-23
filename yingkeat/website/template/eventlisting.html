@@ -1,0 +1,63 @@
+{% extends "base2.html" %}
+{% block title %}Events{% endblock %}
+
+{% block content %}
+<title>Available Events</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .event {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .event h2 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+        .event p {
+            margin: 5px 0;
+        }
+        .join-button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .join-button:hover {
+            background-color: #218838;
+        }
+    </style>
+
+    <h1>Events Available</h1>
+
+    <div class="event">
+        <h2>Event Name 1</h2>
+        <p>Date: September 20, 2024</p>
+        <p>Location: Online</p>
+        <p>Description: This is a brief description of the event.</p>
+        <button class="join-button">Join Event</button>
+    </div>
+
+    <div class="event">
+        <h2>Event Name 2</h2>
+        <p>Date: October 5, 2024</p>
+        <p>Location: Community Center</p>
+        <p>Description: This is another description of the event.</p>
+        <button class="join-button">Join Event</button>
+    </div>
+
+    <div class="event">
+        <h2>Event Name 3</h2>
+        <p>Date: November 10, 2024</p>
+        <p>Location: Local Park</p>
+        <p>Description: This event will be held at the local park with activities for all members.</p>
+        <button class="join-button">Join Event</button>
+    </div>
+{% endblock %}
