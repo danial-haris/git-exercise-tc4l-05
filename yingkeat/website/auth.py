@@ -1,5 +1,5 @@
 from flask import Blueprint,render_template,request,flash,redirect,url_for,Flask
-from .models import User
+from .models import User,Club,Event
 from werkzeug.security import generate_password_hash,check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
@@ -17,7 +17,8 @@ def login():
             if check_password_hash (user.password, password):
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
-                return redirect(url_for('views.home'))#homepage
+                # return redirect(url_for('member.html'))#homepage
+                return render_template("member.html")
             else:
                 flash('Incorrect password, try again.', category='error')
         else:
@@ -57,41 +58,21 @@ def signup():
             db.session.commit()
             login_user(new_user,remember=True)
             flash('Account created!',category='success')
-            return redirect(url_for('views.home'))#homepage
+            return redirect(url_for('views.review'))#homepage
 
 
     return render_template("sign_up.html",user=current_user)
 
-@auth.route('/main')
-def mainpage():
-    return render_template("mainpage.html")
+@auth.route('/myclubs')
+def my_clubs():
+    clubs = Club.query.all()
+    return render_template('my_clubs.html', clubs=clubs)
 
-reviews = []
-
-@auth.route('/', methods=['GET', 'POST'])
-def review():
-    if request.method == 'POST':
-        rating = request.form['rating']
-        comment = request.form['comment']
-        
-        review = {
-            'rating': rating,
-            'comment': comment
-        }
-        reviews.append(review)
-
-        return redirect(url_for('auth.review'))
-
-    return render_template('review_club.html', reviews=reviews)
-
-# clubs = [
-#     {'name': 'Photography Club', 'role': 'Member', 'join_date': '9 September 2024'},
-#     {'name': 'Book Lovers Club', 'role': 'Admin', 'join_date': '9 September 2024'}
-# ]
-
-# @auth.route('/member')
-# def member():
-#     return render_template('member.html', clubs=clubs)
+@auth.route('/club/<int:club_id>')
+def club_details(club_id):
+    club = Club.query.get_or_404(club_id)
+    events = Event.query.filter_by(club_id=club.id).all()
+    return render_template('club_details.html', club=club, events=events)
 
 
 
