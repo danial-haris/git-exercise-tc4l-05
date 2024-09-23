@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 import sqlite3
+from flask import jsonify
 
 App = Flask(__name__)
 
@@ -8,6 +9,18 @@ App = Flask(__name__)
 App.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///management.db'
 App.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(App)
+
+# Message model for chat
+class Message(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sender = db.Column(db.String(100), nullable=False)
+    message = db.Column(db.String(500), nullable=False)
+    timestamp = db.Column(db.DateTime, default=db.func.now())
+
+# Create the database and tables
+with App.app_context():
+    db.create_all()
+
 
 # User model
 class User(db.Model):
@@ -25,16 +38,31 @@ class Club(db.Model):
 with App.app_context():
     db.create_all()
 
+# Route to send a message
+@App.route('/send_message', methods=['POST'])
+def send_message():
+    sender = request.form['sender']
+    message = request.form['message']
+    
+    new_message = Message(sender=sender, message=message)
+    db.session.add(new_message)
+    db.session.commit()
+    
+    return jsonify({"status": "Message sent!"})
+
+# Route to retrieve all messages
+@App.route('/get_messages', methods=['GET'])
+def get_messages():
+    messages = Message.query.order_by(Message.timestamp.asc()).all()
+    messages_data = [{"sender": msg.sender, "message": msg.message, "timestamp": msg.timestamp.strftime('%Y-%m-%d %H:%M:%S')} for msg in messages]
+    
+    return jsonify(messages_data)
+
 #home route
 @App.route('/')
 @App.route('/home')
 def home():
     return render_template('home.html')
-
-#admin route
-@App.route('/admin')
-def admin():
-    return render_template('admin.html')
 
 #user management route
 @App.route('/user', methods=['GET', 'POST'])

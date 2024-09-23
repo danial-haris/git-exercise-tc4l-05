@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Dashboard</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -17,6 +17,7 @@
             background-color: #4c6ef5;
             padding: 10px;
             justify-content: flex-start;
+            position: relative;
         }
 
         .navbar a {
@@ -38,6 +39,23 @@
             background-color: #74b9ff;
         }
 
+        #chat-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 15px;
+            background-color: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        #chat-btn:hover {
+            background-color: #e1e1e1;
+        }
+
         .container {
             max-width: 1200px;
             margin: 20px auto;
@@ -52,88 +70,22 @@
             margin-bottom: 30px;
             color: #2d3436;
         }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        table, th, td {
-            border: 1px solid #dcdde1;
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #4c6ef5;
-            color: white;
-        }
-
-        td {
-            background-color: #f4f4f9;
-        }
-
-        .form-container {
-            margin-bottom: 40px;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 10px;
-            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-container input[type="text"], 
-        .form-container input[type="email"] {
-            padding: 10px;
-            width: 100%;
-            margin: 10px 0;
-            border: 1px solid #dcdde1;
-            border-radius: 5px;
-        }
-
-        .form-container button {
-            background-color: #4c6ef5;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .form-container button:hover {
-            background-color: #74b9ff;
-        }
-
-        .delete-btn {
-            background-color: #d63031;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .delete-btn:hover {
-            background-color: #e17055;
-        }
     </style>
 </head>
 <body>
     <div class="navbar">
-        <a href="/admin" class="{% if request.path == '/admin' %}active{% endif %}">Admin</a>
         <a href="/home" class="{% if request.path == '/home' %}active{% endif %}">Home</a>
         <a href="/user" class="{% if request.path == '/user' %}active{% endif %}">User</a>
         <a href="/clubs" class="{% if request.path == '/clubs' %}active{% endif %}">Clubs</a>
+        <button id="chat-btn">Chat</button>
     </div>
 
     <div class="container">
         {% block content %}
         {% endblock %}
     </div>
+
+    <!-- Include chatbox HTML -->
+    {% include 'chatbox.html' %}
 </body>
 </html>
