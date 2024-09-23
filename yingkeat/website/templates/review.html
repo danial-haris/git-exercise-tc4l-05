@@ -1,0 +1,140 @@
+{% extends "base2.html" %}
+{% block title %}Review{% endblock %}
+
+{% block content %}
+<title>Review</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .club-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            margin: 50px auto;
+            border: none;
+        }
+
+        .club-header h2 {
+            color: #333333;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .review-form label {
+            font-size: 1.1em;
+            color: #333333;
+            margin-bottom: 5px;
+        }
+
+        .review-form input[type="number"],
+        .review-form textarea {
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #dddddd;
+            border-radius: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        .review-form input[type="number"] {
+            max-width: 120px;
+        }
+
+        .submit-btn {
+            padding: 12px 30px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .reviews-container {
+            margin-top: 40px;
+        }
+
+        .reviews-container h3 {
+            color: #333333;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        .review {
+            background-color: #fafafa;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #eeeeee;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .review-header {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .review-rating {
+            color: #ffcc00;
+            margin-right: 10px;
+            display: inline-block;
+            font-size: 1.1em;
+        }
+
+        .review-comment {
+            font-size: 1em;
+            line-height: 1.6;
+            color: #666666;
+        }
+    </style>
+
+    <div class="club-container">
+        <div class="club-header">
+            <h2>Review</h2>
+        </div>
+
+        <form method="POST" class="review-form">
+            <label for="rating">Rating (1-5):</label>
+            <input type="number" id="rating" name="rating" min="1" max="5" required>
+
+            <label for="comment">Comment:</label>
+            <textarea id="comment" name="comment" rows="4" placeholder="Write your review here..." ></textarea>
+
+            <button type="submit" class="submit-btn">Submit Review</button>
+        </form>
+
+        <div class="reviews-container">
+            <h3>Reviews:</h3>
+
+            {% if reviews %}
+                {% for review in reviews %}
+                    <div class="review">
+                        <div class="review-header">
+                            <span class="review-rating">⭐ {{ review.rating }}</span> / 5
+                        </div>
+                        <div class="review-comment">{{ review.comment }}</div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No reviews yet. Be the first to leave a review!</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
