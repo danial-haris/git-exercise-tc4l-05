@@ -1,99 +1,62 @@
+/* Body styling */
 body {
-    background-color: #6ca1e654; /* Change this to your desired color */
+    background-color: #6ca1e654; /* Soft background color */
     margin: 0;
     padding: 0;
     position: relative;
 }
 
-.sidebar {
-    width: 60px;
-    height: 100vh;
-    background-color: #e99595a3;
-    position: fixed;
-    top: 0;
-    left: 0;
+/* Header styling */
+.club-header {
+    width: 100%;
+    background-color: #595899a3; /* Header background color */
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex; /* Flexbox to position items */
+    justify-content: flex-start; /* Align items to the left */
+    padding-left: 20px; /* Add padding to the left */
+}
+
+.club-header nav {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 20px;
+    gap: 25px; /* Space between buttons */
 }
 
-.sidebar a {
-    margin: 20px 0;
-    color: rgb(0, 0, 0);
-    font-size: 24px;
-    text-decoration: none;
-}
-
-.ellipsis-btn {
-    background: none;
-    border: none;
-    color: rgb(0, 0, 0);
-    font-size: 24px;
-    cursor: pointer;
-    margin-top: 20px;
-    position: relative; /* Required for the dropdown menu positioning */
-}
-
-/* Dropdown styles */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-    z-index: 1;
-    padding: 10px;
-    border-radius: 5px;
-    min-width: 160px; /* Ensure dropdown has a minimum width */
-    top: 100%; /* Position dropdown directly below the button */
-    left: 0;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown-content a {
-    display: block;
-    padding: 5px;
-    text-decoration: none;
+.club-header .nav-item {
     color: black;
-    font-size: 20px; /* Smaller font size for dropdown items */
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 20px; /* Add left margin for spacing */
 }
 
-.dropdown-content a:hover {
-    background-color: #ddd;
+.club-header .nav-item:hover {
+    color: #333; /* Hover effect for nav items */
 }
 
 /* Centered content */
 .main-content {
-    margin-left: 80px;
-    padding: 20px;
+    padding: 40px 20px;
     text-align: center;
 }
 
 h1.center {
     text-align: center;
-    font-size: 36px;
-    margin-top: 20px;
+    font-size: 50px;
+    margin-top: 30px;
 }
 
 /* Modal styling */
 .modal {
     display: none;
-    position: fixed; /* Fixed positioning to ensure it's centered */
+    position: fixed; /* Ensure modal is centered */
     z-index: 100;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    overflow: auto; /* Allow scrolling if the content is too long */
+    background-color: rgba(0, 0, 0, 0.553);
+    overflow: auto; /* Allow scrolling if needed */
 }
 
 .modal:target {
@@ -101,31 +64,42 @@ h1.center {
 }
 
 .modal-content {
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     padding: 20px;
     border: 1px solid #888;
-    width: 300px; /* Adjust width */
-    border-radius: 10px; /* Rounded edges */
+    width: 300px;
+    border-radius: 10px;
     text-align: center;
-    margin: 10% auto; /* Center the modal */
+    margin: 10% auto;
 }
 
 .modal-content label {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
-    font-size: 20px; /* Adjusted font size */
+    font-size: 20px;
 }
 
 .modal-content input[type="text"], 
 .modal-content select {
-    padding: 5px;
+    padding: 10px;
     margin: 10px 0;
-    width: 100%; /* Adjust to 100% of modal width */
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 .modal-content input[type="submit"] {
-    padding: 5px 10px;
+    padding: 10px;
+    border: none;
+    background-color: #90e493;
+    color: rgb(5, 5, 5);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-content input[type="submit"]:hover {
+    background-color: #7bc87a;
 }
 
 /* Modal buttons */
@@ -138,7 +112,7 @@ h1.center {
 .modal-button {
     padding: 10px 20px;
     border: none;
-    color: rgb(0, 0, 0);
+    color: rgb(8, 8, 8);
     cursor: pointer;
     text-align: center;
     border-radius: 5px;
@@ -146,11 +120,11 @@ h1.center {
 }
 
 .cancel {
-    background-color: #ef8888; /* Red */
+    background-color: #ef8888;
 }
 
 .create {
-    background-color: #90e493; /* Green */
+    background-color: #90e493;
 }
 
 .close {
@@ -166,4 +140,15 @@ h1.center {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* General input styling */
+.modal-content input[type="text"], 
+.modal-content select {
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }

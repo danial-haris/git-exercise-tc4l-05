@@ -3,48 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>President Club Page</title>
+    <title>Club President Interface</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <header>
         <nav class="navbar">
-            <a href="/" class="nav-item">Home</a>
-            <a href="/members" class="nav-item">Members</a>
-            <a href="/events" class="nav-item">Events</a>
-            <div class="search-bar">
-                <input type="text" placeholder="Search...">
+            <div class="nav-left">
+                <a href="/" class="nav-item">Home</a>
+                <a href="/members" class="nav-item">Members</a>
+                <a href="/events" class="nav-item">Events</a>
             </div>
             <div class="chat-icon">
-                <i class="fas fa-comment"></i> <!-- Changed to chat icon -->
+                <i class="fas fa-comment"></i>
             </div>
         </nav>
     </header>
 
-    <!-- Main Section -->
     <main>
-        <section class="post-upload">
-            <button class="upload-button" onclick="document.getElementById('uploadModal').style.display='block'">
-                <i class="fas fa-plus"></i>
-            </button>
-        </section>
+        <!-- Content can go here -->
     </main>
 
-    <!-- Upload Modal -->
-    <div class="modal" id="uploadModal">
+    <a href="#postModal" class="fab">+</a>
+
+    <div class="modal" id="postModal">
         <div class="modal-content">
-            <span class="close" onclick="document.getElementById('uploadModal').style.display='none'">&times;</span>
-            <h2>Upload a Picture</h2>
-            <form method="POST" action="/upload" enctype="multipart/form-data">
-                <input type="file" name="image" required><br><br>
-                <input type="text" name="caption" placeholder="Caption" required><br><br>
-                <input type="date" name="date" required><br><br>
-                <input type="text" name="location" placeholder="Location" required><br><br>
-                <button type="submit">Post</button>
+            <a href="#" class="close">&times;</a>
+            <form action="/post" method="post">
+                <h2>Create a New Post</h2>
+                <label for="picture">Picture</label>
+                <input type="file" id="picture" name="picture" accept="image/*">
+                <label for="caption">Caption</label>
+                <textarea id="caption" name="caption" rows="4"></textarea>
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date">
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location">
+                <div class="modal-buttons">
+                    <a href="#" class="button">Cancel</a>
+                    <button type="submit">Post</button>
+                </div>
             </form>
         </div>
     </div>
-
 </body>
 </html>
