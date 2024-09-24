@@ -53,7 +53,7 @@ def login():
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
                 # return redirect(url_for('auth.member'))  # Redirect after login
-                return render_template("member.html")
+                return redirect(url_for('auth.review'))
             else:
                 flash('Incorrect password, try again.', category='error')
         else:
@@ -94,7 +94,7 @@ def signup():
             db.session.commit()
             login_user(new_user,remember=True)
             flash('Account created!',category='success')
-            return redirect(url_for('views.review'))#homepage
+            return redirect(url_for('auth.review'))#homepage
 
 
     return render_template("sign_up.html",user=current_user)
@@ -215,18 +215,20 @@ reviews = []
 @auth.route('/review', methods=['GET', 'POST'])
 def review():
     if request.method == 'POST':
-        rating = request.form['rating']
-        comment = request.form['comment']
-        
-        new_review = Review(rating=rating, comment=comment)
-        
-        db.session.add(new_review)
-        db.session.commit()
-        
-        return redirect(url_for('auth.review'))
+        rating = request.form.get('rating')
+        comment = request.form.get('comment')
 
-    reviews = Review.query.all()
-    return render_template('review.html', reviews=reviews)
+        if not rating:
+            flash('Please provide a rating.', category='error')
+        else:
+            new_review = Review(rating=rating, comment=comment, user_id=current_user.id)
+            db.session.add(new_review)
+            db.session.commit()
+            flash('Review submitted successfully!', category='success')
+            return redirect(url_for('auth.review'))
+
+    reviews = Review.query.order_by(Review.id.desc()).all()
+    return render_template("review.html", reviews=reviews)
 
 @auth.route('/club/<int:club_id>')
 def club_profile(club_id):

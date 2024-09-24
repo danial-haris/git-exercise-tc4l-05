@@ -122,12 +122,13 @@
 
         <div class="reviews-container">
             <h3>Reviews:</h3>
-
+        
             {% if reviews %}
                 {% for review in reviews %}
                     <div class="review">
                         <div class="review-header">
                             <span class="review-rating">⭐ {{ review.rating }}</span> / 5
+                            <span>by {{ review.user.first_name }}</span> <!-- Display user's name here -->
                         </div>
                         <div class="review-comment">{{ review.comment }}</div>
                     </div>
