@@ -10,7 +10,7 @@ class User(db.Model, UserMixin):
     reset_token = db.Column(db.String(150), nullable=True)
     reset_token_expiration = db.Column(db.DateTime, nullable=True)
     security_question = db.Column(db.String(255))
-    security_answer = db.Column(db.String(255))  # Store hashed answer
+    security_answer = db.Column(db.String(255))  
     # role = db.Column(db.String(50), nullable=False)  # Define the role column
     # participated_events = db.Column(db.PickleType, default=[])  # Define participated events
 
@@ -41,15 +41,12 @@ class Event(db.Model):
 #     date = db.Column(db.String(50), nullable=False)
 #     description = db.Column(db.Text, nullable=False)
 
-# class Review(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-#     comment = db.Column(db.Text, nullable=False)
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.Integer, nullable=False)
-    comment = db.Column(db.Text, nullable=False)
+    comment = db.Column(db.Text, nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  # Foreign key to User model
+    user = db.relationship('User', backref='reviews')  # Relationship to access User info
 
 
 
