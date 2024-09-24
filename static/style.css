@@ -60,7 +60,7 @@ h1.center {
 }
 
 .modal:target {
-    display: block;
+    display: block; /* Show modal when targeted */
 }
 
 .modal-content {
@@ -120,11 +120,11 @@ h1.center {
 }
 
 .cancel {
-    background-color: #ef8888;
+    background-color: #ef8888; /* Cancel button color */
 }
 
 .create {
-    background-color: #90e493;
+    background-color: #90e493; /* Create button color */
 }
 
 .close {
@@ -151,4 +151,25 @@ h1.center {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+/* Club box styling */
+.club-box {
+    background-color: #f9f9f9; /* Light background for club boxes */
+    border: 1px solid #ddd; /* Border for club boxes */
+    padding: 20px;
+    margin: 20px auto; /* Center boxes with automatic margins */
+    width: 300px; /* Fixed width for boxes */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 10px; /* Rounded corners */
+    text-align: center; /* Centered text */
+}
+
+.club-box h3 {
+    margin-top: 0; /* Remove top margin */
+    color: #333; /* Dark color for club name */
+}
+
+.club-box p {
+    color: #666; /* Gray color for club description */
 }

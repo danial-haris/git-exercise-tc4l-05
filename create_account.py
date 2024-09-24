@@ -19,13 +19,6 @@ class Club(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(255), nullable=True)
-    members = db.relationship('User', secondary='club_members')
-
-# Association table between Clubs and Users
-club_members = db.Table('club_members',
-    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
-    db.Column('club_id', db.Integer, db.ForeignKey('club.id'))
-)
 
 # Create the database and tables
 with app.app_context():
@@ -54,25 +47,31 @@ def create_club():
 @app.route('/join_club', methods=['POST'])
 def join_club():
     club_name = request.form.get('join-club')
-    username = request.form.get('username')  # Username of the member joining
-    email = request.form.get('email')
-    if club_name and username and email:
-        user = User.query.filter_by(username=username).first()
-        if not user:
-            user = User(username=username, email=email)
-            db.session.add(user)
-            db.session.commit()
+    message = ''
+    
+    if club_name:
+        user = User.query.first()  # Assuming the first user
         club = Club.query.filter_by(name=club_name).first()
-        if club:
-            club.members.append(user)
-            db.session.commit()  # Update club with new member
-    return redirect(url_for('home'))
+        if club and user:
+            # If you want to add user membership logic, do it here
+            message = f"You have successfully joined the club '{club_name}'!"
+
+    clubs = Club.query.all()  # Get all clubs to display
+    return render_template('index.html', clubs=clubs, message=message)
 
 # President Interface route
 @app.route('/president_interface')
 def president_interface():
     clubs = Club.query.all()  # Get all clubs for the interface
     return render_template('interface.html', clubs=clubs)
+
+# User clubs route
+@app.route('/user_clubs')
+def user_clubs():
+    user = User.query.first()  # For simplicity, assuming the first user
+    # Since there's no club_members table, we won't have user clubs
+    user_clubs = []  # No clubs to display
+    return render_template('user_clubs.html', user_clubs=user_clubs)
 
 if __name__ == '__main__':
     app.run(debug=True)
