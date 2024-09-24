@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMU CLUB MANAGEMENT</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+
+    <header class="club-header">
+        <nav>
+            <a href="#createClubModal" class="nav-item open-create-modal">Create</a>
+            <a href="#joinClubModal" class="nav-item open-join-modal">Join</a>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <h1 class="center">Welcome to MMU Club Management</h1>
+    </div>
+
+    <style>
+        body {
+          background-image: url('https://www.gdparchitects.com/wp-content/uploads/2022/11/education_mmucyberjaya_006_new.jpg');
+          background-size: cover;
+        }
+      </style>
+
+    <!-- Create a club modal -->
+    <div class="modal" id="createClubModal">
+        <div class="modal-content">
+            <a href="#" class="close">&times;</a>
+            <form action="/create_club" method="POST">
+                <label for="club-name">Create a Club</label>
+                <input type="text" id="club-name" name="club-name" placeholder="Enter club name" required>
+                <div class="modal-buttons">
+                    <a href="#" class="modal-button cancel">Cancel</a>
+                    <input type="submit" class="modal-button create" value="Create">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Join a club modal (with club list) -->
+    <div class="modal" id="joinClubModal">
+        <div class="modal-content">
+            <a href="#" class="close">&times;</a>
+            <form action="/join_club" method="POST">
+                <label for="join-club">Join a Club</label>
+                <select id="join-club" name="join-club" required>
+                    {% if clubs|length > 0 %}
+                        {% for club in clubs %}
+                            <option value="{{ club.name }}">{{ club.name }}</option>
+                        {% endfor %}
+                    {% else %}
+                        <option disabled>No clubs available</option>
+                    {% endif %}
+                </select>
+                <div class="modal-buttons">
+                    <a href="#" class="modal-button cancel">Cancel</a>
+                    <input type="submit" class="modal-button create" value="Join">
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

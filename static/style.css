@@ -1,0 +1,175 @@
+/* Body styling */
+body {
+    background-color: #6ca1e654; /* Soft background color */
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+/* Header styling */
+.club-header {
+    width: 100%;
+    background-color: #595899a3; /* Header background color */
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex; /* Flexbox to position items */
+    justify-content: flex-start; /* Align items to the left */
+    padding-left: 20px; /* Add padding to the left */
+}
+
+.club-header nav {
+    display: flex;
+    gap: 25px; /* Space between buttons */
+}
+
+.club-header .nav-item {
+    color: black;
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 20px; /* Add left margin for spacing */
+}
+
+.club-header .nav-item:hover {
+    color: #333; /* Hover effect for nav items */
+}
+
+/* Centered content */
+.main-content {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+h1.center {
+    text-align: center;
+    font-size: 50px;
+    margin-top: 30px;
+}
+
+/* Modal styling */
+.modal {
+    display: none;
+    position: fixed; /* Ensure modal is centered */
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.553);
+    overflow: auto; /* Allow scrolling if needed */
+}
+
+.modal:target {
+    display: block; /* Show modal when targeted */
+}
+
+.modal-content {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 10% auto;
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.modal-content input[type="text"], 
+.modal-content select {
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.modal-content input[type="submit"] {
+    padding: 10px;
+    border: none;
+    background-color: #90e493;
+    color: rgb(5, 5, 5);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-content input[type="submit"]:hover {
+    background-color: #7bc87a;
+}
+
+/* Modal buttons */
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.modal-button {
+    padding: 10px 20px;
+    border: none;
+    color: rgb(8, 8, 8);
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.cancel {
+    background-color: #ef8888; /* Cancel button color */
+}
+
+.create {
+    background-color: #90e493; /* Create button color */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* General input styling */
+.modal-content input[type="text"], 
+.modal-content select {
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Club box styling */
+.club-box {
+    background-color: #f9f9f9; /* Light background for club boxes */
+    border: 1px solid #ddd; /* Border for club boxes */
+    padding: 20px;
+    margin: 20px auto; /* Center boxes with automatic margins */
+    width: 300px; /* Fixed width for boxes */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 10px; /* Rounded corners */
+    text-align: center; /* Centered text */
+}
+
+.club-box h3 {
+    margin-top: 0; /* Remove top margin */
+    color: #333; /* Dark color for club name */
+}
+
+.club-box p {
+    color: #666; /* Gray color for club description */
+}

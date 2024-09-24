@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club President Interface</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="/" class="nav-item">Home</a>
+                <a href="/members" class="nav-item">Members</a>
+                <a href="/events" class="nav-item">Events</a>
+            </div>
+            <div class="chat-icon">
+                <i class="fas fa-comment"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Content can go here -->
+    </main>
+
+    <a href="#postModal" class="fab">+</a>
+
+    <div class="modal" id="postModal">
+        <div class="modal-content">
+            <a href="#" class="close">&times;</a>
+            <form action="/post" method="post">
+                <h2>Create a New Post</h2>
+                <label for="picture">Picture</label>
+                <input type="file" id="picture" name="picture" accept="image/*">
+                <label for="caption">Caption</label>
+                <textarea id="caption" name="caption" rows="4"></textarea>
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date">
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location">
+                <div class="modal-buttons">
+                    <a href="#" class="button">Cancel</a>
+                    <button type="submit">Post</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

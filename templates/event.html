@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style3.css') }}">
+</head>
+<body>
+    <header>
+        <h1>MANAGE EVENTS</h1>
+        <nav>
+            <a href="{{ url_for('home') }}" class="home-button">HomeS</a>
+        </nav>
+    </header>
+    <style>
+        body {
+          background-image: url('https://www.gdparchitects.com/wp-content/uploads/2022/11/education_mmucyberjaya_006_new.jpg');
+          background-size: cover;
+        }
+      </style>
+    <main>
+        <div class="box">
+            <h2>Add Event</h2>
+            <form>
+                <input type="text" placeholder="Event Name" required>
+                <input type="text" placeholder="Event Date" required>
+                <textarea placeholder="Event Description"></textarea>
+                <div class="button-container">
+                    <button type="submit">Add Event</button>
+                </div>
+            </form>
+        </div>        
+        
+        <div class="box">
+            <h2>Current Events</h2>
+            <ul>
+                {% for event in events %}
+                <li>
+                    {{ event.name }} - {{ event.description }}
+                    <form method="POST" action="{{ url_for('delete_event', id=event.id) }}" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </main>
+</body>
+</html>
