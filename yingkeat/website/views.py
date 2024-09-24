@@ -13,20 +13,4 @@ views = Blueprint('views',__name__)
 def mainpage():
     return render_template("mainpage.html") #This should be the homepage.
 
-reviews = []
 
-@views.route('/review', methods=['GET', 'POST'])
-def review():
-    if request.method == 'POST':
-        rating = request.form['rating']
-        comment = request.form['comment']
-        
-        new_review = Review(rating=rating, comment=comment)
-        
-        db.session.add(new_review)
-        db.session.commit()
-        
-        return redirect(url_for('views.review'))
-
-    reviews = Review.query.all()
-    return render_template('review.html', reviews=reviews)
