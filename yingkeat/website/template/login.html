@@ -13,6 +13,18 @@
         <input type="password" class="form-control" id="password" name="password" placeholder="Enter password"></input>
     </div>
     <br />
+    <style>
+    .reset a{
+        margin-top: 0px;
+        text-align: left;
+        margin-bottom: 15px;
+        color:black
+    }
+    </style>
+
+<div class="reset">
+    <a href="{{ url_for('auth.reset_password_request') }}">Forgot your password?</a>
+</div>
     <button type="submit" class="btn btn-primary">Login</button>
 </form>
 {% endblock %}
