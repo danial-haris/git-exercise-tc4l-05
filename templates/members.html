@@ -15,10 +15,10 @@
     </header>
     <style>
         body {
-          background-image: url('https://www.gdparchitects.com/wp-content/uploads/2022/11/education_mmucyberjaya_006_new.jpg');
-          background-size: cover;
+            background-image: url('https://www.gdparchitects.com/wp-content/uploads/2022/11/education_mmucyberjaya_006_new.jpg');
+            background-size: cover;
         }
-      </style>
+    </style>
     <main>
         <div class="box">
             <h2>Add a New Member</h2>
@@ -36,10 +36,24 @@
             <ul>
                 {% for member in members %}
                 <li>
-                    {{ member.username }} ({{ member.email }})
-                    <form method="POST" action="{{ url_for('delete_member', id=member.id) }}" style="display:inline;">
-                        <button type="submit">Delete</button>
-                    </form>
+                    <div class="member-info">
+                        <div>
+                            {{ member.username }} ({{ member.email }}{% if member.is_admin %} - Admin{% endif %})
+                        </div>
+                        <div class="actions">
+                            <div class="dropdown">
+                                <button class="ellipsis-button">...</button>
+                                <div class="dropdown-content">
+                                    <form method="POST" action="{{ url_for('make_admin', id=member.id) }}">
+                                        <button type="submit">Make Admin</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <form method="POST" action="{{ url_for('delete_member', id=member.id) }}" style="display:inline;">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </div>
+                    </div>
                 </li>
                 {% endfor %}
             </ul>
