@@ -72,6 +72,13 @@ def delete_member(id):
     db.session.commit()
     return redirect(url_for('members'))
 
+# Make a member an admin (newly added route)
+@app.route('/make_admin/<int:id>', methods=['POST'])
+def make_admin(id):
+    # Here, you would implement the logic to promote a member to admin.
+    # For demonstration purposes, we'll just redirect back to members.
+    return redirect(url_for('members'))
+
 # Delete an event
 @app.route('/events/delete/<int:id>', methods=['POST'])
 def delete_event(id):
